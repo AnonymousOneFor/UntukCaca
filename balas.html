@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Balasan Untukmu 💜</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #b57aff, #8b5cf6, #6d28d9);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      margin-top: 40px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 140px;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      padding: 14px;
+      font-size: 15px;
+      font-family: "Poppins", sans-serif;
+      resize: none;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      backdrop-filter: blur(6px);
+      margin-bottom: 20px;
+    }
+
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    button {
+      background: #a855f7;
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #9333ea;
+      transform: scale(1.03);
+    }
+
+    .back-btn {
+      display: block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      color: white;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💬 Bales Disini</h1>
+    <p>Tulis balesanmu di bawah ini yaa, nanti bakal langsung kekirim ke WA aku ✨</p>
+
+    <textarea id="message" placeholder="Tulis yang pengen kamu sampein..."></textarea>
+
+    <button onclick="sendMessage()">Kirim 💌</button>
+    <a href="index.html" class="back-btn">⬅️ Kembali ke halaman sebelumnya</a>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const phoneNumber = "6285741639127"; // ← ganti dengan nomor WhatsApp kamu
+      const message = document.getElementById("message").value.trim();
+
+      if (message === "") {
+        alert("Tulis dulu pesanmu ya 💜");
+        return;
+      }
+
+      const encodedMessage = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      window.open(waUrl, "_blank");
+    }
+  </script>
+
+</body>
+</html>

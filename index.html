@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Confess</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #b57aff, #8b5cf6, #6d28d9);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px; /* cocok untuk iPhone 12 width: 390px */
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      margin-top: 40px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 18px;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.8;
+      white-space: pre-line;
+      text-align: justify;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background: #5613d1;
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #5b33ea;
+      transform: scale(1.05);
+    }
+
+    /* Scroll bar styling (biar estetik di mobile) */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 3px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💌 Plis jangan diketawain, tapi aku minta tolong reply sesuai sama isi hati kamu yang paling dalam yaa 💌</h1>
+    <p>
+Sebelumnya aku minta maaf kalo ini keliatan agak alay banget pake beginian, tapi aku cuma pengen bikin sesuatu yang beda aja, biar agak unik gitu hehe.
+
+Jadi gini, aku pengen cerita sedikit aja. Hari ini tuh tepat satu bulan sejak aku pertama kali say hi ke kamu. Dari satu bulan ini, banyak banget hal random dan lucu yang aku alamin selama kita berinteraksi baik di chat maupun di real life.
+
+You’re a funny girl, a cute girl, and honestly everything about you is interesting for me.
+
+Aku bikin ginian sebenernya cuma buat “mengkonfirmasi” aja sih. Selama sebulan ini aku juga scanning tentang dirimu, like your personality, your favorites, and more. Dan dari semua itu, aku ngerasa kalo kamu tuh the girl that i need. Setelah dua tahun berlalu aku coba nutup hati dari definisi "Love", honestly i didn’t expect to feel something like this again.
+
+Mungkin kamu bakal mikir, “kenapa aku bisa bilang gitu?” ya karena dari hasil scanning aku tadi, aku makin yakin dari pertama kali kita ketemu.
+
+So, pada intinya… i have a crush on you. Tapi aku bener-bener ga minta kamu buat crush me back, HAHA karena itu maksa dong, gabole yaa gabole no no gabole maksa ☝.
+
+Aku cuma pengen tau gimana menurut kamu tentang aku selama ini. Kalo kamu ngasih aku lampu ijo tentang apa yang aku rasain, i’ll try my best to fight for this. Tapi kalo kamu cuma pengen semuanya sebatas temen aja, it’s totally fine. Aku bakal ngetreat hubungan ini selayaknya temen pada umumnya aja dan mencoba buat menghindari chat rizz/gombal kek yang sering aku lakuin selama ini.
+
+So i just need your confirmation, biar aku ga bingung harus ngapain ke depannya.
+
+Kalo kamu ngasih aku kesempatan buat try my best for a relationship "more than friends/lebih dari sekedar teman", aku bakal berjuang dan lakuin itu sepenuh hati. Tapi kalo kamu maunya just as friends, maybe karena kamu lagi ga pengen ada hubungan, atau mungkin udah ada someone you like, just tell me honestly.
+
+Thank you, and have a good one caca 💜
+    </p>
+
+    <button onclick="window.location.href='balas.html'">Reply disini yaa 💬</button>
+  </div>
+
+</body>
+</html>
