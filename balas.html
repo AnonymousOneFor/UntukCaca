@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Balasan Untukmu 💜</title>
+  <title>Replied</title>
   <style>
     * {
       box-sizing: border-box;
@@ -115,7 +115,7 @@
 <body>
 
   <div class="container">
-    <h1>💬 Bales Disini</h1>
+    <h1>💬 Reply Disini</h1>
     <p>Kasi apapun yang pengen kamu sampein ke aku tentang confess aku tadi yaa hehe, nanti bakal langsung kekirim ke WA aku ✨</p>
 
     <textarea id="message" placeholder="Tulis yang pengen kamu sampein..."></textarea>
@@ -130,11 +130,11 @@
       const message = document.getElementById("message").value.trim();
 
       if (message === "") {
-        alert("Tulis dulu pesanmu ya 💜");
+        alert("Tulis dulu pesanmu ya ");
         return;
       }
-
-      const encodedMessage = encodeURIComponent(message);
+      const finalMessage = `Replied: ${message}`;
+      const encodedMessage = encodeURIComponent(finalMessage);
       const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
       window.open(waUrl, "_blank");
@@ -143,4 +143,5 @@
 
 </body>
 </html>
+
 
