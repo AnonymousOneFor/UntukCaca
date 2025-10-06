@@ -13,7 +13,6 @@
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #927aff, #5f5cf6, #3a28d9);
       color: white;
       min-height: 100vh;
       display: flex;
@@ -21,9 +20,24 @@
       align-items: flex-start;
       overflow-y: auto;
       padding: 20px;
+      position: relative;
+      background: #000; /* langit malam */
+    }
+
+    /* Canvas animasi bintang */
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: radial-gradient(ellipse at bottom, #0d1a2f 0%, #000000 100%);
     }
 
     .container {
+      position: relative;
+      z-index: 2; /* di atas bintang */
       width: 100%;
       max-width: 420px;
       background: rgba(255, 255, 255, 0.12);
@@ -137,6 +151,8 @@
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
       color: white;
       animation: popFade 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto; /* biar bisa scroll */
     }
 
     @keyframes popFade {
@@ -144,10 +160,19 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    .popup-content img {
+    .popup-body img {
       max-width: 100%;
       border-radius: 15px;
       margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .img-title {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
     .close-popup {
@@ -165,38 +190,12 @@
     .close-popup:hover {
       background: #ff4d8b;
     }
-
-    .popup-content {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 20px;
-      border-radius: 20px;
-      text-align: center;
-      width: 85%;
-      max-width: 350px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-      color: white;
-      animation: popFade 0.4s ease;
-      max-height: 80vh;
-      overflow-y: auto; /* biar bisa di scroll */
-    }
-
-    .popup-body img {
-      max-width: 100%;
-      border-radius: 15px;
-      margin-top: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .img-title {
-      margin-top: 12px;
-      font-size: 16px;
-      font-weight: 500;
-      color: #fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
   </style>
 </head>
 <body>
+
+  <!-- Canvas background bintang -->
+  <canvas id="stars"></canvas>
 
   <div class="container">
     <h1>💬 Reply di bawah sini</h1>
@@ -207,7 +206,7 @@
 Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
     <button onclick="goInsta()">Klik tombol ini dulu sebelum di kirim</button>
     <button onclick="sendMessage()">Kirim 💌</button>
-    <button onclick="lastPict()">Terakhir klik tombol ini yaa </button>
+    <button onclick="lastPict()">Terakhir klik tombol ini yaa 💌</button>
     <a href="index.html" class="back-btn">⬅️ Kembali ke halaman sebelumnya</a>
   </div>
 
@@ -217,15 +216,16 @@ Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
       <h3>📸 Mau liat caca?</h3>
       <div class="popup-body">
         <img id="preview" src="Screenshot 2025-10-06 141615.jpg" alt="Last Picture" />
-        <h4 class="img-title">✨ Ini caca yang suka ngebo✨</h4>
+        <h4 class="img-title">✨ Ini caca yang suka ngebo ✨</h4>
       </div>
       <button class="close-popup" onclick="closePopup()">Tutup</button>
     </div>
   </div>
 
   <script>
+    // === Kirim pesan ke WhatsApp ===
     function sendMessage() {
-      const phoneNumber = "6285741639127"; // ← ganti dengan nomor WhatsApp kamu
+      const phoneNumber = "6285741639127";
       const message = document.getElementById("message").value.trim();
 
       if (message === "") {
@@ -239,12 +239,13 @@ Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
       window.open(waUrl, "_blank");
     }
 
+    // === Buka Instagram ===
     function goInsta() {
       const igUrl = `https://www.instagram.com/reel/DPG4kgogaDH/?igsh=MWFpdGdqN2d3cnlpaQ==`;
       window.open(igUrl, "_blank");
     }
 
-    // === Popup ===
+    // === Popup Gambar ===
     function lastPict() {
       document.getElementById("popup").style.display = "flex";
     }
@@ -252,4 +253,53 @@ Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
     function closePopup() {
       document.getElementById("popup").style.display = "none";
     }
+
+    // === Animasi Bintang Jatuh ===
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Star {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speed = Math.random() * 0.8 + 0.2;
+        this.alpha = Math.random() * 0.8 + 0.2;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+          this.reset();
+          this.y = 0;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 150; i++) stars.push(new Star());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => { star.update(); star.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
+
+</body>
+</html>
