@@ -13,7 +13,6 @@
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #927aff, #5f5cf6, #3a28d9);
       color: white;
       min-height: 100vh;
       display: flex;
@@ -21,9 +20,24 @@
       align-items: flex-start;
       overflow-y: auto;
       padding: 20px;
+      position: relative;
+      background: #000; /* langit malam */
+    }
+
+    /* Canvas untuk animasi bintang */
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: radial-gradient(ellipse at bottom, #0d1a2f 0%, #000000 100%);
     }
 
     .container {
+      position: relative;
+      z-index: 2; /* di atas bintang */
       width: 100%;
       max-width: 420px; /* cocok untuk iPhone 12 width: 390px */
       background: rgba(255, 255, 255, 0.12);
@@ -71,7 +85,6 @@
       transform: scale(1.05);
     }
 
-    /* Scroll bar styling (biar estetik di mobile) */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -80,23 +93,25 @@
       background: rgba(255, 255, 255, 0.4);
       border-radius: 3px;
     }
-
   </style>
 </head>
 <body>
 
+  <!-- Canvas background bintang -->
+  <canvas id="stars"></canvas>
+
   <div class="container">
-    <h1>💌 Plzz jangan diketawain, tapi aku minta tolong reply sesuai sama isi hati kamu yang paling dalam yaa dan abis ngirim ini aku mau menghilang bentar karena sedikit malu🤏🏼, ehh engga si pria sigma dan gentle mana ada malu malu😏 💌</h1>
+    <h1>Plzz jangan diketawain, tapi aku minta tolong reply sesuai sama isi hati kamu yang paling dalam yaa dan abis ngirim ini aku mau menghilang bentar karena sedikit malu🤏🏼, ehh engga sii soalnya kan pria sigma dan gentle mana ada malu malu😏 </h1>
     <p>
-Sebelumnya aku minta maaf kalo ini keliatan agak alay banget pake beginian, tapi aku cuma pengen bikin sesuatu yang beda aja, biar agak unik gitu hehe.
+Sebelumnya aku minta maaf kalo ini keliatan agak alay banget pake beginian, tapi aku cuma pengen bikin sesuatu yang beda aja hehe.
 
 Jadi gini, aku pengen cerita sedikit aja. Hari ini tuh tepat satu bulan sejak aku pertama kali say hi ke kamu. Dari satu bulan ini, banyak banget hal random dan lucu yang aku alamin selama kita berinteraksi baik di chat maupun di real life.
 
-You’re a funny girl, a cute girl, and honestly everything about you is interesting for me.
+You’re a funny girl, a cute girl, super pretty girl, and honestly everything about you is interesting for me.
 
-Aku bikin ginian sebenernya cuma buat “mengkonfirmasi” aja sih. Selama sebulan ini aku juga scanning tentang dirimu, like your personality, your favorites, and more. Dan dari semua itu, aku ngerasa kalo kamu tuh the girl that i need, that i want. Setelah dua tahun berlalu aku mencoba buat menutup hati dari definisi "Love", honestly i didn’t expect to feel something like this again in this year.
+Aku bikin ginian sebenernya buat “mengkonfirmasi” aja. Selama sebulan ini aku juga scanning tentang dirimu, like your personality, your favorites, and more. Dan dari semua itu, aku ngerasa kalo kamu tuh the girl that i need, the girl that i want. Setelah dua tahun berlalu aku mencoba buat menutup hati dari definisi "Love", honestly i didn’t expect to feel something like this again in this year.
 
-Mungkin kamu bakal bertanya tanya kenapa aku bisa bilang kamu the girl that i need, that i want ya karena dari hasil scanning aku tadi, aku makin yakin dari pertama kali kita ketemu.
+Mungkin kamu bakal bertanya tanya kenapa aku bisa bilang kamu the girl that i need, the girl that i want ya karena dari hasil scanning aku tadi, aku makin yakin dari pertama kali kita ketemu.
 
 So, pada intinya… i have a crush on you. Tapi aku bener-bener ga maksa kamu buat have a crush on me back koo HAHA karena itu maksa dan gabole yaa no no gabole maksa ☝.
 
@@ -112,25 +127,61 @@ Thank you, and have a good one caca 💜
     <button onclick="window.location.href='balas.html'">Reply disini yaa 💬</button>
   </div>
 
+  <script>
+    // === Animasi bintang jatuh ===
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Star {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speed = Math.random() * 0.8 + 0.2;
+        this.alpha = Math.random() * 0.8 + 0.2;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+          this.reset();
+          this.y = 0;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 150; i++) {
+      stars.push(new Star());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const star of stars) {
+        star.update();
+        star.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
