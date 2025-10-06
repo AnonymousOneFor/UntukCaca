@@ -73,19 +73,20 @@
     }
 
     button {
-      background: #6055f7;
+      background: #55c9f7;
       border: none;
-      color: white;
+      color: rgb(24, 83, 131);
       font-size: 16px;
       padding: 12px 30px;
       border-radius: 25px;
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
+      margin-bottom: 10px;
     }
 
     button:hover {
-      background: #33d5ea;
+      background: #b9ea33;
       transform: scale(1.03);
     }
 
@@ -118,8 +119,10 @@
     <h1>💬 Reply di bawah sini</h1>
     <p>Kasi apapun yang pengen kamu sampein ke aku tentang confess aku tadi yaa hehe, nanti bakal langsung kekirim ke WA aku ✨</p>
 
-    <textarea id="message" placeholder="Tulis yang pengen kamu sampein..."></textarea>
+    <textarea id="message" placeholder="Tulis yang pengen kamu sampein disini...
 
+Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
+    <button onclick="goInsta()">Klik tombol ini dulu sebelum di kirim</button>
     <button onclick="sendMessage()">Kirim 💌</button>
     <a href="index.html" class="back-btn">⬅️ Kembali ke halaman sebelumnya</a>
   </div>
@@ -139,11 +142,15 @@
 
       window.open(waUrl, "_blank");
     }
+
+    function goInsta() {
+      const igUrl = `https://www.instagram.com/reel/DPG4kgogaDH/?igsh=MWFpdGdqN2d3cnlpaQ==`;
+      window.open(igUrl, "_blank");
+    }
   </script>
 
 </body>
 </html>
-
 
 
 
