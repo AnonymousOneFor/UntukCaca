@@ -111,6 +111,89 @@
       background: rgba(255, 255, 255, 0.4);
       border-radius: 3px;
     }
+
+    /* === Popup Styling === */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 85%;
+      max-width: 350px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      color: white;
+      animation: popFade 0.4s ease;
+    }
+
+    @keyframes popFade {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-content img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    .close-popup {
+      background: #ff6fa1;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 8px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .close-popup:hover {
+      background: #ff4d8b;
+    }
+
+    .popup-content {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 85%;
+      max-width: 350px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      color: white;
+      animation: popFade 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto; /* biar bisa di scroll */
+    }
+
+    .popup-body img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .img-title {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
   </style>
 </head>
 <body>
@@ -124,7 +207,20 @@
 Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
     <button onclick="goInsta()">Klik tombol ini dulu sebelum di kirim</button>
     <button onclick="sendMessage()">Kirim 💌</button>
+    <button onclick="lastPict()">Terakhir klik tombol ini yaa </button>
     <a href="index.html" class="back-btn">⬅️ Kembali ke halaman sebelumnya</a>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <h3>📸 Mau liat caca?</h3>
+      <div class="popup-body">
+        <img id="preview" src="Screenshot 2025-10-06 141615.jpg" alt="Last Picture" />
+        <h4 class="img-title">✨ Ini caca yang suka ngebo✨</h4>
+      </div>
+      <button class="close-popup" onclick="closePopup()">Tutup</button>
+    </div>
   </div>
 
   <script>
@@ -144,15 +240,16 @@ Terus klik tombol pertama di bawah ini abis itu baru di kirim yaa"></textarea>
     }
 
     function goInsta() {
-      const igUrl = `https://www.instagram.com/reel/DPG4kgogaDH/?utm_source=ig_web_copy_link`;
+      const igUrl = `https://www.instagram.com/reel/DPG4kgogaDH/?igsh=MWFpdGdqN2d3cnlpaQ==`;
       window.open(igUrl, "_blank");
     }
+
+    // === Popup ===
+    function lastPict() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
   </script>
-
-</body>
-</html>
-
-
-
-
-
